@@ -1,0 +1,20 @@
+#pragma once
+#include "Matrix.hpp"
+#include <functional>
+
+class SerialSolver {
+private:
+    int n;
+    double h;       
+    
+    Matrix U; // Grid at step k
+    Matrix U_new; // Grid at step k+1
+    
+    std::function<double(double, double)> f;
+
+public:
+    // Constructor
+    SerialSolver(int grid_size, std::function<double(double, double)> forcing_term);
+
+    void solve(int max_iterations, double tolerance);
+};
