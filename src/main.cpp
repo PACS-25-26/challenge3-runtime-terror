@@ -1,4 +1,3 @@
-#define OMPI_SKIP_MPICXX 1 // Avoid conflicts with MPI C++ bindings
 #include "SerialSolver.hpp"
 #include "ParallelSolver.hpp"
 #include "Functions.hpp"
@@ -30,14 +29,47 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     
-    MpiDomain mpi_domain(n, rank, size); // Create the MPI domain configuration
-    ParallelSolver solver(mpi_domain, EquationData::forcing_term);
-    
-    if (rank == 0) { // Only the master process should print this message
-        std::cout << "Initialization completed on master process." << std::endl;
+    int max_iter = 50000;
+    double tol = 1e-6;
+
+    // serial solver test (only on rank 0)
+    if (rank == 0) {
+        std::cout << "\nTEST GRIGLIA " << n << "x" << n << std::endl;
+        std::cout << "Starting serial test..." << std::endl;
+        
+        SerialSolver serial_solver(n, EquationData::forcing_term);
+        
+        double start_serial = MPI_Wtime();
+        serial_solver.solve(max_iter, tol);
+        double end_serial = MPI_Wtime();
+        
+        double err_serial = serial_solver.compute_analytical_error(EquationData::exact_solution);
+        
+        std::cout << "[SERIAL] Time: " << (end_serial - start_serial) 
+                  << " s | Error: " << err_serial << std::endl;
     }
+
+    // To start with a clean slate, we synchronize all processes here before starting the parallel test
+    MPI_Barrier(MPI_COMM_WORLD);
+
+    if (rank == 0) {
+        std::cout << "\nStarting parallel test with " << size << " processes..." << std::endl;
+    }
+
+    MpiDomain domain(n, rank, size);
+    ParallelSolver parallel_solver(domain, EquationData::forcing_term);
     
-    solver.solve(50000, 1e-6);
+    double start_parallel = MPI_Wtime();
+    parallel_solver.solve(max_iter, tol);
+    double end_parallel = MPI_Wtime();
+    
+    double err_parallel = parallel_solver.compute_analytical_error(EquationData::exact_solution);
+
+    // Only the master process prints the parallel results to avoid cluttering the output
+    if (rank == 0) {
+        std::cout << "[PARALLEL] Time: " << (end_parallel - start_parallel) 
+                  << " s | Error: " << err_parallel << std::endl;
+    }
     
     MPI_Finalize(); // Clean up MPI environment
     return 0;

@@ -17,4 +17,6 @@ public:
     SerialSolver(int grid_size, std::function<double(double, double)> forcing_term);
 
     void solve(int max_iterations, double tolerance);
+
+    double compute_analytical_error(std::function<double(double, double)> exact_sol);
 };

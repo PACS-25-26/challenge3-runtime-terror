@@ -89,3 +89,29 @@ void ParallelSolver::solve(int max_iter, double tol) {
                   << ", Final Error: " << global_error << std::endl;
     }
 }
+
+double ParallelSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) {
+    double local_error_sum = 0.0;
+
+    for (int i = 1; i <= domain.local_rows; ++i) {
+        int global_i = domain.start_row + (i - 1);
+
+        for (int j = 0; j < domain.global_n; ++j) {
+            double x = global_i * h;
+            double y = j * h;
+
+            double diff = U(i, j) - exact_sol(x, y);
+            local_error_sum += diff * diff;
+        }
+    }
+
+    double global_error_sum = 0.0;
+    
+    // Reduce all local sums to the master process 
+    // We use MPI_Reduce instead of Allreduce because only Rank 0 needs to print it
+    MPI_Reduce(&local_error_sum, &global_error_sum, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+    // The L2 norm over a 2D grid is scaled by the area element (h * h)
+    // Error = sqrt( sum(diff^2) * h^2 ) = h * sqrt(sum(diff^2))
+    return std::sqrt(h *global_error_sum);
+}

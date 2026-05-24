@@ -48,3 +48,21 @@ void SerialSolver::solve(int max_iter, double tol) {
 
     std::cout << "Jacobi terminated. Iterations: " << iter << ", Final Error: " << error << std::endl;
 }
+
+double SerialSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) {
+    double total_error_sum = 0.0;
+
+    // Cicla su TUTTA la griglia globale
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            double x = i * h;
+            double y = j * h;
+
+            double diff = U(i, j) - exact_sol(x, y);
+            total_error_sum += diff * diff;
+        }
+    }
+
+    // Applica la formula del PDF direttamente alla fine
+    return std::sqrt(h * total_error_sum);
+}

@@ -1,5 +1,5 @@
 CXX = mpicxx # Use mpicxx for MPI support
-CXXFLAGS = -Wall -Wextra -O3 -std=c++17
+CXXFLAGS = -Wall -Wextra -O3 -std=c++17 -fopenmp -DOMPI_SKIP_MPICXX=1
 INCLUDES = -I./include
 
 SRC_DIR = src

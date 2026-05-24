@@ -19,4 +19,6 @@ public:
     
     // Parallel solve method
     void solve(int max_iter, double tol);
+
+    double compute_analytical_error(std::function<double(double, double)> exact_sol);
 };
