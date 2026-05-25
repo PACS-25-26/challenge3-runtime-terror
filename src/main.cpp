@@ -32,6 +32,11 @@ int main(int argc, char* argv[]) {
     int max_iter = 50000;
     double tol = 1e-6;
 
+    double time_serial = 0.0; // To store the serial execution time for speedup calculation
+    double err_serial = 0.0; // To store the serial error for comparison
+    double time_parallel = 0.0; // To store the parallel execution time for speedup calculation
+    double err_parallel = 0.0; // To store the parallel error for comparison
+
     // serial solver test (only on rank 0)
     if (rank == 0) {
         std::cout << "\nTEST GRIGLIA " << n << "x" << n << std::endl;
@@ -42,10 +47,12 @@ int main(int argc, char* argv[]) {
         double start_serial = MPI_Wtime();
         serial_solver.solve(max_iter, tol);
         double end_serial = MPI_Wtime();
+
+        time_serial = end_serial - start_serial;
         
-        double err_serial = serial_solver.compute_analytical_error(EquationData::exact_solution);
+        err_serial = serial_solver.compute_analytical_error(EquationData::exact_solution);
         
-        std::cout << "[SERIAL] Time: " << (end_serial - start_serial) 
+        std::cout << "[SERIAL] Time: " << time_serial 
                   << " s | Error: " << err_serial << std::endl;
     }
 
@@ -62,13 +69,16 @@ int main(int argc, char* argv[]) {
     double start_parallel = MPI_Wtime();
     parallel_solver.solve(max_iter, tol);
     double end_parallel = MPI_Wtime();
+
+    time_parallel = end_parallel - start_parallel;
     
-    double err_parallel = parallel_solver.compute_analytical_error(EquationData::exact_solution);
+    err_parallel = parallel_solver.compute_analytical_error(EquationData::exact_solution);
 
     // Only the master process prints the parallel results to avoid cluttering the output
     if (rank == 0) {
-        std::cout << "[PARALLEL] Time: " << (end_parallel - start_parallel) 
+        std::cout << "[PARALLEL] Time: " << time_parallel 
                   << " s | Error: " << err_parallel << std::endl;
+        std::cout << "\n Speedup: " << time_serial / time_parallel << std::endl;
     }
     
     MPI_Finalize(); // Clean up MPI environment
