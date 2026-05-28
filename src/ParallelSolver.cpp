@@ -1,7 +1,9 @@
 #include "ParallelSolver.hpp"
 #include <cmath>
 #include <iostream>
+#include <fstream>
 #include <mpi.h> // We need MPI here for the communication
+#include <omp.h> // We need OpenMP for parallel loops if we choose to use it in the future
 
 // Constructor
 ParallelSolver::ParallelSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term)
@@ -45,6 +47,7 @@ void ParallelSolver::solve(int max_iter, double tol) {
             MPI_COMM_WORLD, MPI_STATUS_IGNORE
         );
         
+        #pragma omp parallel for reduction(+:local_error_sum) 
         // Loop only over the actual rows assigned to this rank (from 1 to local_rows)
         for (int i = 1; i <= domain.local_rows; ++i) {
             
@@ -93,6 +96,7 @@ void ParallelSolver::solve(int max_iter, double tol) {
 double ParallelSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) {
     double local_error_sum = 0.0;
 
+    #pragma omp parallel for reduction(+:local_error_sum)
     for (int i = 1; i <= domain.local_rows; ++i) {
         int global_i = domain.start_row + (i - 1);
 
@@ -114,4 +118,56 @@ double ParallelSolver::compute_analytical_error(std::function<double(double, dou
     // The L2 norm over a 2D grid is scaled by the area element (h * h)
     // Error = sqrt( sum(diff^2) * h^2 ) = h * sqrt(sum(diff^2))
     return std::sqrt(h *global_error_sum);
+}
+
+
+void ParallelSolver::export_vtk(const std::string& filename) {
+    int n = domain.global_n;
+
+    std::vector<int> counts(domain.size);
+    std::vector<int> displs(domain.size);
+
+    int base_rows = n / domain.size;
+    int remainder = n % domain.size;
+
+    for(int i = 0; i < domain.size; ++i){
+        int rows_rank_i = (i < remainder) ? base_rows + 1 : base_rows;
+        counts[i] = rows_rank_i * n;
+
+        int start_row_i = (i < remainder) ? i * rows_rank_i : remainder * (base_rows + 1) + (i - remainder) * base_rows;
+        displs[i] = start_row_i * n;
+    }
+
+    std::vector<double> global_U;
+    if (domain.rank == 0) {
+        global_U.resize(n * n, 0.0);
+    }
+    
+    MPI_Gatherv(&U(1, 0), domain.local_rows * n, MPI_DOUBLE, 
+                global_U.data(), counts.data(), displs.data(), MPI_DOUBLE, 
+                0, MPI_COMM_WORLD);
+
+    if (domain.rank == 0) {
+        std::ofstream vtk_file(filename);
+        if(!vtk_file){
+            std::cerr << "Error writing VTK file" << std::endl;
+            return;
+        }
+        vtk_file << "# vtk DataFile Version 3.0\n";
+        vtk_file << "Laplace Solution\n";
+        vtk_file << "ASCII\n";
+        vtk_file << "DATASET STRUCTURED_POINTS\n";
+        vtk_file << "DIMENSIONS " << n << " " << n << " 1\n";
+        vtk_file << "ORIGIN 0 0 0\n";
+        vtk_file << "SPACING " << h << " " << h << " 0\n";
+        vtk_file << "POINT_DATA " << n * n << "\n";
+        vtk_file << "SCALARS U double 1\n";
+        vtk_file << "LOOKUP_TABLE default\n";
+
+        for(int i = 0; i < n * n; ++i){
+            vtk_file << global_U[i] << "\n";
+        }
+        vtk_file.close();
+        std::cout << "VTK file '" << filename << "' written successfully." << std::endl;
+    }
 }

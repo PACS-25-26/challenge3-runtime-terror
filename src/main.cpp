@@ -81,6 +81,7 @@ int main(int argc, char* argv[]) {
         std::cout << "\n Speedup: " << time_serial / time_parallel << std::endl;
     }
     
+    parallel_solver.export_vtk("solution.vtk");
     MPI_Finalize(); // Clean up MPI environment
     return 0;
 }

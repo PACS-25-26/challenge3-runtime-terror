@@ -2,6 +2,7 @@
 #include "Matrix.hpp"
 #include "MpiDomain.hpp"
 #include <functional>
+#include<string>
 
 class ParallelSolver {
 private:
@@ -21,4 +22,6 @@ public:
     void solve(int max_iter, double tol);
 
     double compute_analytical_error(std::function<double(double, double)> exact_sol);
+
+    void export_vtk(const std::string& filename); 
 };
