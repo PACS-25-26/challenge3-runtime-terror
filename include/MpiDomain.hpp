@@ -1,17 +1,31 @@
 #pragma once
 
+/**
+ * @brief Structure representing the local domain assigned to a specific MPI process.
+ * * This struct automatically computes the 1D row-wise domain decomposition, 
+ * handling load balancing when the global grid size is not perfectly 
+ * divisible by the number of MPI processes. It also accounts for the 
+ * ghost cells needed for boundary communication.
+ */
 struct MpiDomain {
     int rank;
     int size;
-    int global_n; // Total size of the global grid (n x n)
+    int global_n; /** @brief Total size of the global grid (n x n) */
 
-    int local_rows; // Number of actual grid rows assigned to this MPI process
-    int start_row; // Global index (0 to n-1) of the first actual row assigned
-    
-    // Total rows to allocate in memory (actual rows + 2 ghost cells for boundaries)
+    int local_rows; /** @brief Number of actual grid rows assigned to this MPI process */
+    int start_row; /** @brief Global index (0 to n-1) of the first actual row assigned */
+
+    /** * @brief Total rows to allocate in memory. 
+     * Includes the actual rows plus 2 extra rows for ghost cells (top and bottom boundaries).
+     */
     int allocated_rows; 
 
-    // Constructor computes the load balancing automatically
+    /** * @brief Constructor for the MpiDomain struct.
+     * * Automatically computes the 1D row-wise domain decomposition, handling load balancing when the global grid size is not perfectly divisible by the number of MPI processes. It also accounts for the ghost cells needed for boundary communication.
+     * @param n Total size of the global grid (n x n).
+     * @param r Rank of the MPI process.
+     * @param s Total number of MPI processes.
+     */
     MpiDomain(int n, int r, int s) : rank(r), size(s), global_n(n) {
         // 1. Load balancing: distribute rows among processes
         int base_rows = n / size;
