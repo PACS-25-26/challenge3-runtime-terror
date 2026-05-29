@@ -15,6 +15,19 @@ ParallelSolver::ParallelSolver(MpiDomain mpi_dom, std::function<double(double, d
       f(forcing_term),
       bc(boundary_term) 
 {
+    for(int i = 1; i <= domain.local_rows; ++i){
+        int global_i = domain.start_row + (i - 1);
+        double x = global_i * h;
+
+        for(int j = 0; j < domain.global_n; ++j){
+            double y = j * h;
+
+            if(global_i == 0 || global_i == domain.global_n - 1 || j == 0 || j == domain.global_n - 1){
+                U(i, j) = bc(x, y);
+                U_new(i, j) = bc(x, y);
+            }
+        }
+    }
 }
 
 void ParallelSolver::solve(int max_iter, double tol) {
@@ -48,30 +61,16 @@ void ParallelSolver::solve(int max_iter, double tol) {
             MPI_COMM_WORLD, MPI_STATUS_IGNORE
         );
         
-        #pragma omp parallel for reduction(+:local_error_sum) 
+        int i_start = (domain.start_row == 0) ? 2 : 1;
+        int i_end = (domain.start_row + domain.local_rows == domain.global_n) ? domain.local_rows - 1 : domain.local_rows;
+       
         // Loop only over the actual rows assigned to this rank (from 1 to local_rows)
-        for (int i = 1; i <= domain.local_rows; ++i) {
-            
-            // Compute the global row index to check for physical boundaries and coordinates
-            int global_i = domain.start_row + (i - 1);
-            double x = global_i * h; // global x coordinate for this row
-
-            // If this row is the physical top (0) or bottom (n-1) of the whole grid, set Dirichlet BC on horizontal boundaries
-            if (global_i == 0 || global_i == domain.global_n - 1) {
-                for (int j = 0; j < domain.global_n; ++j) {
-                    double y = j * h;
-                    U(i, j) = bc(x, y);
-                    U_new(i, j) = bc(x, y);
-                }
-                continue; 
-            }
-
-            // Dirichlet BCs on vertical boundaries (j = 0 or j = n-1)
-            U_new(i, 0) = bc(x, 0);
-            U_new(i, domain.global_n - 1) = bc(x, (domain.global_n - 1) * h);
-
-            for (int j = 1; j < domain.global_n - 1; ++j) {
-                double x = global_i * h;
+        #pragma omp parallel for reduction(+:local_error_sum) 
+        for (int i = i_start; i <= i_end; ++i) {
+            for(int j = 1; j < domain.global_n -1; ++j){
+                // Compute the global row index to check for physical boundaries and coordinates
+                int global_i = domain.start_row + (i - 1);
+                double x = global_i * h; // global x coordinate for this row
                 double y = j * h; 
 
                 // Update formula
@@ -79,7 +78,8 @@ void ParallelSolver::solve(int max_iter, double tol) {
 
                 double diff = U_new(i, j) - U(i, j);
                 local_error_sum += diff * diff;
-            }
+
+            }    
         }
         
         double global_error_sum = 0.0;

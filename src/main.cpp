@@ -1,5 +1,6 @@
 #include "SerialSolver.hpp"
 #include "ParallelSolver.hpp"
+#include "ParallelSchwarzSolver.hpp"
 #include "Functions.hpp"
 #include <iostream>
 #include <string>
@@ -36,9 +37,11 @@ int main(int argc, char* argv[]) {
     double err_serial = 0.0; // To store the serial error for comparison
     double time_parallel = 0.0; // To store the parallel execution time for speedup calculation
     double err_parallel = 0.0; // To store the parallel error for comparison
+    double time_schwarz = 0.0; // To store the Schwarz execution time for speedup calculation
+    double err_schwarz = 0.0; // To store the Schwarz error for comparison
 
     // set up problem data (forcing term, exact solution, boundary condition)
-    ProblemData problem = TestCases::ExpCos(); 
+    ProblemData problem = TestCases::Sine(); 
 
     // serial solver test (only on rank 0)
     if (rank == 0) {
@@ -84,7 +87,33 @@ int main(int argc, char* argv[]) {
         std::cout << "\n Speedup: " << time_serial / time_parallel << std::endl;
     }
     
-    parallel_solver.export_vtk("solution.vtk");
+    parallel_solver.export_vtk("solution_jacobi.vtk");
+
+    // To start with a clean slate, we synchronize all processes here before starting the parallel test
+    MPI_Barrier(MPI_COMM_WORLD); 
+    if (rank == 0){
+        std::cout << "\nStarting Schwarz test with " << size << " processes..." << std::endl;
+    }
+    int max_global_iter = 2000;
+    int max_local_iter = 100;
+    ParallelSchwarzSolver schwarz_solver(domain, problem.f, problem.g);
+
+    double start_schwarz = MPI_Wtime();
+    schwarz_solver.solve(max_global_iter, max_local_iter, tol);
+    double end_schwarz = MPI_Wtime();
+
+    time_schwarz = end_schwarz - start_schwarz;
+
+    err_schwarz = schwarz_solver.compute_analytical_error(problem.exact_solution);
+
+    if(rank == 0){
+        std::cout << "[SCHWARZ] Time: " << time_schwarz 
+                  << " s | Error: " << err_schwarz << std::endl;
+        std::cout << "\n Speedup: " << time_serial / time_schwarz << std::endl;
+    }
+
+    schwarz_solver.export_vtk("solution_schwarz.vtk");
+
     MPI_Finalize(); // Clean up MPI environment
     return 0;
 }
