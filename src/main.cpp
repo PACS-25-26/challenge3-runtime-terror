@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
         std::cout << "\n Speedup: " << time_serial / time_parallel << std::endl;
     }
     
-    parallel_solver.export_vtk("solution_jacobi.vtk");
+    parallel_solver.export_vtk("test/output/vtk/solution_jacobi.vtk");
 
 
     // PARALLEL SOLVER TEST - BLOCK JACOBI
@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
         std::cout << "\n Speedup: " << time_serial / time_schwarz << std::endl;
     }
 
-    schwarz_solver.export_vtk("solution_schwarz.vtk");
+    schwarz_solver.export_vtk("test/output/vtk/solution_schwarz.vtk");
 
     MPI_Finalize(); // Clean up MPI environment
     return 0;

@@ -5,7 +5,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -19,7 +19,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -33,7 +33,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -47,7 +47,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -61,7 +61,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -75,7 +75,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -89,7 +89,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -103,7 +103,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -117,7 +117,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -131,7 +131,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -145,7 +145,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -159,7 +159,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -173,7 +173,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -187,7 +187,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -201,7 +201,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -215,7 +215,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -229,7 +229,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -243,7 +243,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -257,7 +257,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -271,7 +271,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -285,7 +285,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -299,7 +299,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -313,7 +313,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -327,7 +327,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -341,7 +341,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -355,7 +355,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -369,7 +369,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -383,7 +383,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -397,7 +397,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -411,7 +411,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64
@@ -425,7 +425,7 @@ model		: 68
 model name	: AMD Ryzen 7 9800X3D 8-Core Processor
 stepping	: 0
 microcode	: 0xffffffff
-cpu MHz		: 4691.064
+cpu MHz		: 4691.108
 cache size	: 1024 KB
 physical id	: 0
 siblings	: 16
@@ -439,7 +439,7 @@ cpuid level	: 13
 wp		: yes
 flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good nopl tsc_reliable nonstop_tsc cpuid extd_apicid tsc_known_freq pni pclmulqdq ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand hypervisor lahf_lm cmp_legacy svm cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw topoext perfctr_core ssbd ibrs ibpb stibp vmmcall fsgsbase bmi1 avx2 smep bmi2 erms invpcid avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves avx_vnni avx512_bf16 clzero xsaveerptr arat npt nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold v_vmsave_vmload avx512vbmi umip avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid fsrm avx512_vp2intersect
 bugs		: sysret_ss_attrs null_seg spectre_v1 spectre_v2 spec_store_bypass
-bogomips	: 9382.12
+bogomips	: 9382.21
 TLB size	: 192 4K pages
 clflush size	: 64
 cache_alignment	: 64

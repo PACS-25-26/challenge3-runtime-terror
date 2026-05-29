@@ -8,16 +8,9 @@ DATA_DIR="$ROOT_DIR/test/data"
 OUTPUT_CSV="$DATA_DIR/scalability_results.csv"
 HW_INFO="$DATA_DIR/hw.info"
 
-GRID_SIZES=${GRID_SIZES:-"128 256 512"}
+GRID_SIZES=${GRID_SIZES:-"16 32 64 128 256"}
 MPI_PROCESSES=${MPI_PROCESSES:-"1 2 4"}
 THREADS=${THREADS:-2}
-
-extract_metric() {
-    local output="$1"
-    local pattern="$2"
-    local column="$3"
-    printf '%s\n' "$output" | grep "$pattern" | awk -v col="$column" '{print $col}' || echo "NaN"
-}
 
 run_test() {
     local processes=$1
@@ -28,18 +21,21 @@ run_test() {
     local output
     output=$(OMP_NUM_THREADS="$THREADS" mpirun --oversubscribe -np "$processes" "$ROOT_DIR/main.out" "$n" 2>&1)
 
-    local serial_time
-    local parallel_time
-    local speedup
-    local error
+    local ser_time=$(printf '%s\n' "$output" | grep "\[SERIAL\] Time:" | awk '{print $3}')
+    local ser_error=$(printf '%s\n' "$output" | grep "\[SERIAL\] Time:" | awk '{print $7}')
 
-    serial_time=$(extract_metric "$output" "\[SERIAL\] Time:" 3)
-    parallel_time=$(extract_metric "$output" "\[PARALLEL\] Time:" 3)
-    speedup=$(extract_metric "$output" "Speedup:" 2)
-    error=$(extract_metric "$output" "\[PARALLEL\] Time:" 7) 
+    local par_time=$(printf '%s\n' "$output" | grep "\[PARALLEL\] Time:" | awk '{print $3}')
+    local par_error=$(printf '%s\n' "$output" | grep "\[PARALLEL\] Time:" | awk '{print $7}')
+    local par_speedup=$(printf '%s\n' "$output" | grep "Speedup:" | sed -n '1p' | awk '{print $2}')
 
-    printf '%s,%s,%s,%s,%s,%s,%s\n' \
-        "$n" "$processes" "$THREADS" "$serial_time" "$parallel_time" "$speedup" "$error" \
+    local sch_time=$(printf '%s\n' "$output" | grep "\[SCHWARZ\] Time:" | awk '{print $3}')
+    local sch_error=$(printf '%s\n' "$output" | grep "\[SCHWARZ\] Time:" | awk '{print $7}')
+    local sch_speedup=$(printf '%s\n' "$output" | grep "Speedup:" | sed -n '2p' | awk '{print $2}')
+
+    printf '%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n' \
+        "$n" "$processes" "$THREADS" \
+        "$ser_time" "$par_time" "$par_speedup" "$par_error" \
+        "$sch_time" "$sch_speedup" "$sch_error" \
         >> "$OUTPUT_CSV"
 }
 
@@ -54,7 +50,7 @@ echo "Building project..."
 make -C "$ROOT_DIR" clean all
 
 echo "Initializing CSV..."
-printf 'n,mpi_ranks,omp_threads,serial_time_s,parallel_time_s,speedup,l2_error\n' > "$OUTPUT_CSV"
+printf 'n,mpi_ranks,omp_threads,serial_time_s,parallel_time_s,speedup,l2_error,schwarz_time_s,schwarz_speedup,schwarz_error\n' > "$OUTPUT_CSV"
 
 
 for n in $GRID_SIZES; do
