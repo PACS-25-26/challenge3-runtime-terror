@@ -65,7 +65,7 @@ void SerialSolver::solve(int max_iter, double tol) {
     std::cout << "Jacobi terminated. Iterations: " << iter << ", Final Error: " << error << std::endl;
 }
 
-double SerialSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) {
+double SerialSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) const {
     double total_error_sum = 0.0;
 
     // Cicla su TUTTA la griglia globale

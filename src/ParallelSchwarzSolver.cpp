@@ -2,10 +2,16 @@
 #include <cmath>
 #include <iostream>
 #include <fstream>
-#include <mpi.h> // We need MPI here for the communication
-#include <omp.h> // We need OpenMP for parallel loops if we choose to use it in the future
+#include <mpi.h> 
+#include <omp.h> 
 
-// Constructor
+/**
+ * @brief Construct a new Parallel Schwarz Solver:: Parallel Schwarz Solver object and sets physical BCs
+ * 
+ * @param mpi_dom MPI domain
+ * @param forcing_term f(x,y)
+ * @param boundary_term g(x,y)
+ */
 ParallelSchwarzSolver::ParallelSchwarzSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term)
     : domain(mpi_dom), 
       h(1.0 / (domain.global_n - 1.0)), 
@@ -30,6 +36,13 @@ ParallelSchwarzSolver::ParallelSchwarzSolver(MpiDomain mpi_dom, std::function<do
     }
 }
 
+/**
+ * @brief Implements parallel block Jacobi iterations: the domain is decomposed into subdomains (blocks) and each block is solved iteratively while exchanging BC info with the neighbors 
+ * 
+ * @param max_global_iter maximum number of block Jacobi iterations (global iterations)
+ * @param max_local_iter maximum number of local iterations
+ * @param tol tolerance for convergence
+ */
 void ParallelSchwarzSolver::solve(int max_global_iter, int max_local_iter, double tol){
     double global_error = tol + 1.0;
     int global_iter = 0; 
@@ -119,7 +132,13 @@ void ParallelSchwarzSolver::solve(int max_global_iter, int max_local_iter, doubl
     }
 }
 
-double ParallelSchwarzSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) {
+/**
+ * @brief Computes the L2 error between the numerical solution and the exact solution
+ * 
+ * @param exact_sol  exact solution function
+ * @return L2 error
+ */
+double ParallelSchwarzSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) const{
     double local_error_sum = 0.0;
 
     #pragma omp parallel for reduction(+:local_error_sum)
@@ -146,54 +165,3 @@ double ParallelSchwarzSolver::compute_analytical_error(std::function<double(doub
     return std::sqrt(h *global_error_sum);
 }
 
-
-void ParallelSchwarzSolver::export_vtk(const std::string& filename) {
-    int n = domain.global_n;
-
-    std::vector<int> counts(domain.size);
-    std::vector<int> displs(domain.size);
-
-    int base_rows = n / domain.size;
-    int remainder = n % domain.size;
-
-    for(int i = 0; i < domain.size; ++i){
-        int rows_rank_i = (i < remainder) ? base_rows + 1 : base_rows;
-        counts[i] = rows_rank_i * n;
-
-        int start_row_i = (i < remainder) ? i * rows_rank_i : remainder * (base_rows + 1) + (i - remainder) * base_rows;
-        displs[i] = start_row_i * n;
-    }
-
-    std::vector<double> global_U;
-    if (domain.rank == 0) {
-        global_U.resize(n * n, 0.0);
-    }
-    
-    MPI_Gatherv(&U(1, 0), domain.local_rows * n, MPI_DOUBLE, 
-                global_U.data(), counts.data(), displs.data(), MPI_DOUBLE, 
-                0, MPI_COMM_WORLD);
-
-    if (domain.rank == 0) {
-        std::ofstream vtk_file(filename);
-        if(!vtk_file){
-            std::cerr << "Error writing VTK file" << std::endl;
-            return;
-        }
-        vtk_file << "# vtk DataFile Version 3.0\n";
-        vtk_file << "Laplace Solution\n";
-        vtk_file << "ASCII\n";
-        vtk_file << "DATASET STRUCTURED_POINTS\n";
-        vtk_file << "DIMENSIONS " << n << " " << n << " 1\n";
-        vtk_file << "ORIGIN 0 0 0\n";
-        vtk_file << "SPACING " << h << " " << h << " 0\n";
-        vtk_file << "POINT_DATA " << n * n << "\n";
-        vtk_file << "SCALARS U double 1\n";
-        vtk_file << "LOOKUP_TABLE default\n";
-
-        for(int i = 0; i < n * n; ++i){
-            vtk_file << global_U[i] << "\n";
-        }
-        vtk_file.close();
-        std::cout << "VTK file '" << filename << "' written successfully." << std::endl;
-    }
-}

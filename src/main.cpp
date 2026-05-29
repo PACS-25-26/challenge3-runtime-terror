@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     // set up problem data (forcing term, exact solution, boundary condition)
     ProblemData problem = TestCases::Sine(); 
 
-    // serial solver test (only on rank 0)
+    // SERIAL SOLVER TEST (only on rank 0)
     if (rank == 0) {
         std::cout << "\nTEST GRIGLIA " << n << "x" << n << std::endl;
         std::cout << "Starting serial test..." << std::endl;
@@ -62,8 +62,8 @@ int main(int argc, char* argv[]) {
                   << " s | Error: " << err_serial << std::endl;
     }
 
-    // To start with a clean slate, we synchronize all processes here before starting the parallel test
-    MPI_Barrier(MPI_COMM_WORLD);
+    // PARALLEL SOLVER TEST - JACOBI 
+    MPI_Barrier(MPI_COMM_WORLD);  // To start with a clean slate, we synchronize all processes here
 
     if (rank == 0) {
         std::cout << "\nStarting parallel test with " << size << " processes..." << std::endl;
@@ -89,11 +89,13 @@ int main(int argc, char* argv[]) {
     
     parallel_solver.export_vtk("solution_jacobi.vtk");
 
-    // To start with a clean slate, we synchronize all processes here before starting the parallel test
-    MPI_Barrier(MPI_COMM_WORLD); 
+
+    // PARALLEL SOLVER TEST - BLOCK JACOBI
+    MPI_Barrier(MPI_COMM_WORLD); // To start with a clean slate, we synchronize all processes here
     if (rank == 0){
         std::cout << "\nStarting Schwarz test with " << size << " processes..." << std::endl;
     }
+
     int max_global_iter = 2000;
     int max_local_iter = 100;
     ParallelSchwarzSolver schwarz_solver(domain, problem.f, problem.g);

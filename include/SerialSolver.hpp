@@ -19,5 +19,5 @@ public:
 
     void solve(int max_iterations, double tolerance);
 
-    double compute_analytical_error(std::function<double(double, double)> exact_sol);
+    double compute_analytical_error(std::function<double(double, double)> exact_sol) const ;
 };
