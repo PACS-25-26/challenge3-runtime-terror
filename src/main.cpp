@@ -42,7 +42,7 @@ int main(int argc, char* argv[]) {
         std::cout << "\nTEST GRIGLIA " << n << "x" << n << std::endl;
         std::cout << "Starting serial test..." << std::endl;
         
-        SerialSolver serial_solver(n, EquationData::forcing_term);
+        SerialSolver serial_solver(n, EquationData::forcing_term, EquationData::boundary_condition);
         
         double start_serial = MPI_Wtime();
         serial_solver.solve(max_iter, tol);
@@ -64,7 +64,7 @@ int main(int argc, char* argv[]) {
     }
 
     MpiDomain domain(n, rank, size);
-    ParallelSolver parallel_solver(domain, EquationData::forcing_term);
+    ParallelSolver parallel_solver(domain, EquationData::forcing_term, EquationData::boundary_condition);
     
     double start_parallel = MPI_Wtime();
     parallel_solver.solve(max_iter, tol);

@@ -6,13 +6,14 @@
 #include <omp.h> // We need OpenMP for parallel loops if we choose to use it in the future
 
 // Constructor
-ParallelSolver::ParallelSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term)
+ParallelSolver::ParallelSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term)
     : domain(mpi_dom), 
       h(1.0 / (domain.global_n - 1.0)), 
       // Allocate using allocated_rows (local rows + 2 ghost cells)
       U(domain.allocated_rows, domain.global_n),       
       U_new(domain.allocated_rows, domain.global_n),   
-      f(forcing_term) 
+      f(forcing_term),
+      bc(boundary_term) 
 {
 }
 
@@ -53,11 +54,21 @@ void ParallelSolver::solve(int max_iter, double tol) {
             
             // Compute the global row index to check for physical boundaries and coordinates
             int global_i = domain.start_row + (i - 1);
-            
-            // If this row is the physical top (0) or bottom (n-1) of the whole grid, skip it (Dirichlet BC already set)
+            double x = global_i * h; // global x coordinate for this row
+
+            // If this row is the physical top (0) or bottom (n-1) of the whole grid, set Dirichlet BC on horizontal boundaries
             if (global_i == 0 || global_i == domain.global_n - 1) {
+                for (int j = 0; j < domain.global_n; ++j) {
+                    double y = j * h;
+                    U(i, j) = bc(x, y);
+                    U_new(i, j) = bc(x, y);
+                }
                 continue; 
             }
+
+            // Dirichlet BCs on vertical boundaries (j = 0 or j = n-1)
+            U_new(i, 0) = bc(x, 0);
+            U_new(i, domain.global_n - 1) = bc(x, (domain.global_n - 1) * h);
 
             for (int j = 1; j < domain.global_n - 1; ++j) {
                 double x = global_i * h;

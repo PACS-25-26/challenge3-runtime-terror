@@ -6,4 +6,6 @@ namespace EquationData {
 
     // Exact solution u(x, y) (useful later for computing L2 error)
     double exact_solution(double x, double y);
+
+    double boundary_condition(double x, double y); 
 }

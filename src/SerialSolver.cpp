@@ -3,12 +3,13 @@
 #include <iostream>
 
 // Constructor
-SerialSolver::SerialSolver(int grid_size, std::function<double(double, double)> forcing_term)
+SerialSolver::SerialSolver(int grid_size, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term)
     : n(grid_size), 
       h(1.0 / (grid_size - 1.0)), 
       U(grid_size, grid_size),       
       U_new(grid_size, grid_size),   
-      f(forcing_term) 
+      f(forcing_term),
+      bc(boundary_term) 
 {}
 
 void SerialSolver::solve(int max_iter, double tol) {
@@ -31,6 +32,18 @@ void SerialSolver::solve(int max_iter, double tol) {
 
                 double diff = U_new(i, j) - U(i, j);
                 error += diff * diff;
+            }
+        }
+
+        // BCs
+        for (int i = 0; i < n; ++i){
+            for (int j = 0; j < n; ++j){
+                if(i == 0 || i == n-1 || j == 0 || j == n-1){
+                    double x = i * h;
+                    double y = j * h;
+                    U(i, j) = bc(x, y);
+                    U_new(i, j) = bc(x, y);
+                }
             }
         }
 

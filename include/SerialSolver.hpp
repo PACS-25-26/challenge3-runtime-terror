@@ -11,10 +11,11 @@ private:
     Matrix U_new; // Grid at step k+1
     
     std::function<double(double, double)> f;
+    std::function<double(double, double)> bc;
 
 public:
     // Constructor
-    SerialSolver(int grid_size, std::function<double(double, double)> forcing_term);
+    SerialSolver(int grid_size, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term);
 
     void solve(int max_iterations, double tolerance);
 

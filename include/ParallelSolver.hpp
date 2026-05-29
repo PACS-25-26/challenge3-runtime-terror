@@ -13,10 +13,11 @@ private:
     Matrix U_new;   
     
     std::function<double(double, double)> f;
+    std::function<double(double, double)> bc;
 
 public:
     // Constructor takes the MPI domain configuration
-    ParallelSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term);
+    ParallelSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term);
     
     // Parallel solve method
     void solve(int max_iter, double tol);

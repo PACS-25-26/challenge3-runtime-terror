@@ -11,4 +11,7 @@ namespace EquationData {
         return std::sin(2.0 * M_PI * x) * std::sin(2.0 * M_PI * y);
     }
 
+    double boundary_condition(double x, double y){
+        return 0.0 * x + 0.0 * y;
+    }
 }
