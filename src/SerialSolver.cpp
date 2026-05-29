@@ -10,7 +10,21 @@ SerialSolver::SerialSolver(int grid_size, std::function<double(double, double)> 
       U_new(grid_size, grid_size),   
       f(forcing_term),
       bc(boundary_term) 
-{}
+{
+    // BCs
+    for (int i = 0; i < n; ++i){
+        for (int j = 0; j < n; ++j){
+            if(i == 0 || i == n-1 || j == 0 || j == n-1){
+                // Physical coordinates of the node (i, j)
+                double x = i * h;
+                double y = j * h;
+
+                U(i, j) = bc(x, y);
+                U_new(i, j) = bc(x, y);
+            }
+        }
+    }
+}
 
 void SerialSolver::solve(int max_iter, double tol) {
     double error = tol + 1.0; 
@@ -21,7 +35,7 @@ void SerialSolver::solve(int max_iter, double tol) {
     while (error > tol && iter < max_iter) {
         error = 0.0;
 
-        // Only on internal nodes, the borders are fixed at 0.0
+        // Only on internal nodes
         for (int i = 1; i < n - 1; ++i) {
             for (int j = 1; j < n - 1; ++j) {
                 // Physical coordinates of the node (i, j)
@@ -35,17 +49,6 @@ void SerialSolver::solve(int max_iter, double tol) {
             }
         }
 
-        // BCs
-        for (int i = 0; i < n; ++i){
-            for (int j = 0; j < n; ++j){
-                if(i == 0 || i == n-1 || j == 0 || j == n-1){
-                    double x = i * h;
-                    double y = j * h;
-                    U(i, j) = bc(x, y);
-                    U_new(i, j) = bc(x, y);
-                }
-            }
-        }
 
         error = std::sqrt(h * error);
 

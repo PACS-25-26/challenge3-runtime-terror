@@ -1,11 +1,16 @@
 #pragma once
+#include <functional>
 
-namespace EquationData {
+struct ProblemData{
     // Forcing term f(x, y)
-    double forcing_term(double x, double y);
-
+    std::function<double(double, double)> f;
     // Exact solution u(x, y) (useful later for computing L2 error)
-    double exact_solution(double x, double y);
+    std::function<double(double, double)> exact_solution;
+    // Boundary condition g(x, y)
+    std::function<double(double, double)> g;
+};
 
-    double boundary_condition(double x, double y); 
-}
+namespace TestCases {
+    ProblemData Sine(); // paper test case with u(x,y) = sin(2*pi*x)*sin(2*pi*y)
+    ProblemData ExpCos(); // test case with u(x,y) = exp(x) * cos(y);
+} // end of namespace TestCases

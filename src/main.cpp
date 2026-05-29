@@ -37,12 +37,15 @@ int main(int argc, char* argv[]) {
     double time_parallel = 0.0; // To store the parallel execution time for speedup calculation
     double err_parallel = 0.0; // To store the parallel error for comparison
 
+    // set up problem data (forcing term, exact solution, boundary condition)
+    ProblemData problem = TestCases::ExpCos(); 
+
     // serial solver test (only on rank 0)
     if (rank == 0) {
         std::cout << "\nTEST GRIGLIA " << n << "x" << n << std::endl;
         std::cout << "Starting serial test..." << std::endl;
         
-        SerialSolver serial_solver(n, EquationData::forcing_term, EquationData::boundary_condition);
+        SerialSolver serial_solver(n, problem.f, problem.g);
         
         double start_serial = MPI_Wtime();
         serial_solver.solve(max_iter, tol);
@@ -50,7 +53,7 @@ int main(int argc, char* argv[]) {
 
         time_serial = end_serial - start_serial;
         
-        err_serial = serial_solver.compute_analytical_error(EquationData::exact_solution);
+        err_serial = serial_solver.compute_analytical_error(problem.exact_solution);
         
         std::cout << "[SERIAL] Time: " << time_serial 
                   << " s | Error: " << err_serial << std::endl;
@@ -64,7 +67,7 @@ int main(int argc, char* argv[]) {
     }
 
     MpiDomain domain(n, rank, size);
-    ParallelSolver parallel_solver(domain, EquationData::forcing_term, EquationData::boundary_condition);
+    ParallelSolver parallel_solver(domain, problem.f, problem.g);
     
     double start_parallel = MPI_Wtime();
     parallel_solver.solve(max_iter, tol);
@@ -72,7 +75,7 @@ int main(int argc, char* argv[]) {
 
     time_parallel = end_parallel - start_parallel;
     
-    err_parallel = parallel_solver.compute_analytical_error(EquationData::exact_solution);
+    err_parallel = parallel_solver.compute_analytical_error(problem.exact_solution);
 
     // Only the master process prints the parallel results to avoid cluttering the output
     if (rank == 0) {
