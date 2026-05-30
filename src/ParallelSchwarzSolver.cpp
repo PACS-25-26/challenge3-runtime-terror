@@ -5,13 +5,7 @@
 #include <mpi.h> 
 #include <omp.h> 
 
-/**
- * @brief Construct a new Parallel Schwarz Solver:: Parallel Schwarz Solver object and sets physical BCs
- * 
- * @param mpi_dom MPI domain
- * @param forcing_term f(x,y)
- * @param boundary_term g(x,y)
- */
+
 ParallelSchwarzSolver::ParallelSchwarzSolver(MpiDomain mpi_dom, std::function<double(double, double)> forcing_term, std::function<double(double, double)> boundary_term)
     : domain(mpi_dom), 
       h(1.0 / (domain.global_n - 1.0)), 
@@ -36,13 +30,7 @@ ParallelSchwarzSolver::ParallelSchwarzSolver(MpiDomain mpi_dom, std::function<do
     }
 }
 
-/**
- * @brief Implements parallel block Jacobi iterations: the domain is decomposed into subdomains (blocks) and each block is solved iteratively while exchanging BC info with the neighbors 
- * 
- * @param max_global_iter maximum number of block Jacobi iterations (global iterations)
- * @param max_local_iter maximum number of local iterations
- * @param tol tolerance for convergence
- */
+
 void ParallelSchwarzSolver::solve(int max_global_iter, int max_local_iter, double tol){
     double global_error = tol + 1.0;
     int global_iter = 0; 
@@ -132,12 +120,7 @@ void ParallelSchwarzSolver::solve(int max_global_iter, int max_local_iter, doubl
     }
 }
 
-/**
- * @brief Computes the L2 error between the numerical solution and the exact solution
- * 
- * @param exact_sol  exact solution function
- * @return L2 error
- */
+
 double ParallelSchwarzSolver::compute_analytical_error(std::function<double(double, double)> exact_sol) const{
     double local_error_sum = 0.0;
 

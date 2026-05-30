@@ -16,7 +16,10 @@ We used these parameters:
 
 ### Execution Times
 ![Execution Times](test/output/plots/1_execution_times.png)
-This plot highlights the problem of **Communication Overhead**: 
+
+
+This plot highlights the problem of **Communication Overhead**:
+
 * **Small grids**: for $N \le 32$ the serial algorithm (black dashed line) outperforms the parallel configurations, particularly the 4-rank setup.
 Indeed, for coarse grids the CPU time spent initializing OpenMP and communicating via MPI dominates the operations required by small domains. 
 * **Break point**: at $N = 64$ each configuration of the parallel solvers outperform the serial version
@@ -25,7 +28,10 @@ Indeed, for coarse grids the CPU time spent initializing OpenMP and communicatin
 
 ### Speedup Analyis
 ![Speedup](test/output/plots/2_speedup.png)
+
+
 This plot shows the limits of Additive Schwarz Methods without overlapping domains: the parallel Jacobi solver reaches more than 5x speedup on the 256x256 grid, whereas the Block Jacobi solver drops in performance as discussed before. 
+
 This phenomenon is not due to an implementation error, but due to the mathematical behavior of the algorithm: this kind of problems have infinite propagation speed, but the block structure enforces local iterations and forcing the solver to perform more computations to solve the global problem. 
 
 ### L2 Error
