@@ -1,0 +1,5 @@
+1. penso ci sia un errore nella formula per l'errore L2 (non dovrebbe esserci un fattore h^2 all'interno della radice?)
+2. README.md e RESULT.md
+3. Neumann BCs? 
+4. il mio pc ha 8 core fisici, potrei provare anche con 8 core 
+5. in teoria le BC dovrebbero essere user-defined, ma per consistenza abbiamo TestCases predefiniti; potrebbe avere senso anche vedere che non converge se ci sono dati non compatibili? 
